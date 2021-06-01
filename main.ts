@@ -1,18 +1,14 @@
 class Quize {
     watch: number;
-    time: number;
-    curTime?: Date ;
-    min:string;
-    sec:string;
-    ms:string;
+    setTime: number;
+    curTime?: Date;
+    times:{ min:string;sec:string;ms:string };
     timerBox:HTMLDivElement | null;
 
     constructor() {
         this.watch = 0;
-        this.time = 0;
-        this.min = '00';
-        this.sec = '00';
-        this.ms = '00';
+        this.setTime = 0;
+        this.times = { min:'00', sec:'00', ms:'00' };
         this.timerBox = null;
         this.gameStart();
     }
@@ -24,19 +20,21 @@ class Quize {
             quizeStartBtn.remove();
             this.start();
             this.watchRender();
-        })
+        });
     }
     timer() {
-        this.curTime = new Date(Date.now() - this.time)
+        let { min, sec, ms} = this.times;
 
-        this.min = this.addZero(this.curTime.getMinutes())
-        this.sec = this.addZero(this.curTime.getSeconds())
-        this.ms = this.addZero(Math.floor(this.curTime.getMilliseconds() / 10))
+        this.curTime = new Date(Date.now() - this.setTime);
 
-        this.timerBox!.textContent = this.min + ':' + this.sec + ':' + this.ms;
+        min = this.addZero(this.curTime.getMinutes());
+        sec = this.addZero(this.curTime.getSeconds());
+        ms = this.addZero(Math.floor(this.curTime.getMilliseconds() / 10));
+
+        this.timerBox!.textContent = min + ':' + sec + ':' + ms;
     }
     start() {
-        this.time = Date.now()
+        this.setTime = Date.now();
         this.watch = setInterval(() => this.timer(), 100);
     }
     stop() {
@@ -49,7 +47,7 @@ class Quize {
         (document.getElementById('quiz-wrap')as HTMLDivElement).prepend(this.timerBox)
     }
     addZero(num:number) {
-        return (num < 10 ? '0'+num : ''+num)
+        return (num < 10 ? '0'+num : ''+num);
     }
 }
 
