@@ -4,9 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
     <title>typing-game</title>
 </head>
 <body>
-    
-</body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="startBtn">
+                <button>START</button>
+            </div>
+            <div class="gameContainer" style="display: none;">
+                <div class="clock">
+                    <h1>Your Time</h1>
+                    <h2>00:00:00</h2>
+                </div>
+                <div class="wordContainer">
+                   <h1>단어</h1>
+                </div>
+                <div class="inputContainer">
+                    <input type="text">
+                </div>
+                <div class="scoreContainer">
+                    <h3>Your Score</h3><h3>00</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+    </body>
 </html>

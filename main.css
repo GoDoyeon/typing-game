@@ -1,0 +1,35 @@
+body {
+  background-color: #ccb9bc;
+  margin: 0;
+  padding: 0;
+  height: 0;
+}
+
+.container {
+  display: flex;
+  width: 95%;
+  height: 650px;
+  background-color: #ffebee;
+  justify-content: center;
+  margin: auto;
+  margin-top: 2.5%;
+}
+
+.startBtn {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+}
+
+.startBtn button {
+  border-color: none;
+  border: none;
+  font-weight: bolder;
+  font-size: 30px;
+  background-color: #ffebee;
+}
+
+.gameContainer {
+  margin: auto;
+}
