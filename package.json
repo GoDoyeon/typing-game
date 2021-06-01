@@ -1,0 +1,12 @@
+{
+  "name": "typing-game",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/fe-javascript-study/typing-game.git",
+  "author": "chunyong <fr_lovemy5851>",
+  "license": "MIT",
+  "dependencies": {
+    "parcel-bundler": "^1.12.5",
+    "typescript": "^4.3.2"
+  }
+}
