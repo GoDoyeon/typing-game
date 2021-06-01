@@ -35,7 +35,7 @@ class Quize {
     }
     start() {
         this.setTime = Date.now();
-        this.watch = setInterval(() => this.timer(), 100);
+        this.watch = setInterval(() => this.timer(), 10);
     }
     stop() {
         clearInterval(this.watch);
