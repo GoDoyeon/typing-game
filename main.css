@@ -33,3 +33,11 @@ body {
 .gameContainer {
   margin: auto;
 }
+
+.showing {
+  display: block;
+}
+
+.hiding {
+  display: none;
+}

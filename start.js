@@ -10,8 +10,9 @@ const gameContainer = document.querySelector('.gameContainer'),
 startBtn.addEventListener('click', startGame);
 
 function startGame() {
-    gameContainer.style.display = 'block';
-    startBtn.style.display = 'none';
+    gameContainer.classList.add('showing');
+    gameContainer.classList.remove('hiding');
+    startBtn.remove();
     startClock();
 }
 
@@ -21,12 +22,7 @@ let seconds = 0,
     minutes = 0,
     hours = 0;
 
-
 function startClock() {
-    add();
-    
-}
-function add() {
     seconds++;
     if (seconds >= 60) {
         seconds = 0;
@@ -42,5 +38,5 @@ function add() {
     timer();
 }
 function timer() {
-    setTimeout(add, 1000);
+    setTimeout(startClock, 1000);
 }
