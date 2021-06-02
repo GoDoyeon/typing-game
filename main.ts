@@ -2,8 +2,8 @@ class Quize {
     watch: number;
     setTime: number;
     curTime?: Date;
-    times:{ min:string;sec:string;ms:string };
-    timerBox:HTMLDivElement | null;
+    times:{ min:string; sec:string; ms:string };
+    timerBox: HTMLDivElement | null;
 
     constructor() {
         this.watch = 0;
