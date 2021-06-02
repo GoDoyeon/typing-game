@@ -14,7 +14,7 @@ class Quize {
     }
 
     gameStart() {
-        let quizeStartBtn = (document.querySelector('.quiz-start')as HTMLDivElement)
+        let quizeStartBtn = (document.querySelector('.quiz-start-btn')as HTMLDivElement)
 
         quizeStartBtn.addEventListener('click',()=>{
             quizeStartBtn.remove();
