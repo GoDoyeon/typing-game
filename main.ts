@@ -41,10 +41,13 @@ class Quize {
         clearInterval(this.watch);
     }
     watchRender() {
+        this.timerRender();
+    }
+    timerRender(){
         this.timerBox =  document.createElement('div')as HTMLDivElement;
         this.timerBox.classList.add('timerBox')as void;
 
-        (document.getElementById('quiz-wrap')as HTMLDivElement).prepend(this.timerBox)
+        (document.getElementById('quiz-wrap')as HTMLDivElement).prepend(this.timerBox);
     }
     addZero(num:number) {
         return (num < 10 ? '0'+num : ''+num);
