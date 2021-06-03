@@ -46,7 +46,7 @@ function displayCount() {
     secondCount++;
 }
 
-stopWatch = setInterval(displayCount, 1000/60);
+stopWatch = setInterval(displayCount, 1000);
 
 
 function init() {
