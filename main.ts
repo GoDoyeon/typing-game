@@ -5,6 +5,7 @@ class Quize {
     times:{ min:string; sec:string; ms:string };
     timerBox: HTMLDivElement | null;
     quizBox: HTMLDivElement | null;
+    inputBox: HTMLInputElement | null;
     quizArray: string[];
     curQuiz: string
 
@@ -14,6 +15,7 @@ class Quize {
         this.times = { min:'00', sec:'00', ms:'00' };
         this.timerBox = null;
         this.quizBox = null;
+        this.inputBox = null;
         this.quizArray = ["ability", "able", "about", "above", "accept", "according", "account", "across", "act", "action", "activity", "actually", "add", "behind", "believe", "benefit", "best", "better", "between", "beyond", "card", "care", "career", "carry", "case", "catch", "cause", "cell", "center", "central", "decade", "decide", "decision", "deep", "defense", "degree", "example", "executive", "exist", "expect", "experience", "first", "fish", "five", "floor", "fly", "focus", "follow", "food"];
         this.curQuiz = '';
         this.gameStart();
@@ -28,6 +30,8 @@ class Quize {
             this.start();
             this.watchRender();
             this.randomQuize();
+            this.inputFocus();
+            this.confirmQuiz();
         });
     }
     timer() {
@@ -51,6 +55,7 @@ class Quize {
     watchRender() {
         this.timerRender();
         this.quizRender();
+        this.inputRender();
     }
     quizBtnRender(){
         let quizeStartBtn = document.createElement('button')as HTMLButtonElement;
@@ -71,6 +76,12 @@ class Quize {
 
         (document.getElementById('quiz-wrap')as HTMLDivElement).append(this.quizBox);
     }
+    inputRender(){
+        this.inputBox = document.createElement('input')as HTMLInputElement;
+        this.inputBox.classList.add('input-box')as void;
+
+        (document.getElementById('quiz-wrap')as HTMLDivElement).append(this.inputBox);
+    }
     randomQuize(){
         const quizLen:number = this.quizArray.length || 0;
         const randomNum = Math.floor(Math.random() * quizLen);
@@ -84,6 +95,15 @@ class Quize {
         }).join('');
 
         (document.querySelector('.quiz-box')as HTMLDivElement).innerHTML = `${text}`;
+    }
+    inputFocus(){
+        this.inputBox!.focus();
+
+    }
+    confirmQuiz(){
+        this.inputBox!.addEventListener('keyup',(evt:any)=>{
+            console.log(evt!.target.value);
+        });
     }
     addZero(num:number) {
         return (num < 10 ? '0'+num : ''+num);

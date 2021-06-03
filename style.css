@@ -168,12 +168,23 @@ table {
   color: #1de9b6;
 }
 
-.quiz-box{
-  width:50%;
-  margin:30px 0;
-  padding:12px;
-  border:1px solid #fff;
-  font-size:50px;
-  color:#fff;
+.quiz-box {
+  width: 50%;
+  margin: 30px 0;
+  padding: 12px;
+  border: 1px solid rgb(118, 118, 118);
+  font-size: 50px;
+  color: #fff;
   text-align: center;
+}
+
+.input-box {
+  width: 50%;
+  margin: 30px 0;
+  padding: 12px;
+  font-size: 50px;
+  color: #63f0cd;
+  text-align: center;
+  background: transparent;
+  outline-style: none;
 }
