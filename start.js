@@ -23,45 +23,43 @@ function startGame() {
 //Start StopWatch when click the startBtn.
 
 
-let hours = 00;
-let minutes = 00;
-let seconds = 00;
-let interval;
+const timer = document.querySelector('.timer');
+let secondCount = 0;
+let stopWatch; //Define a global to store the interval when it is active.
 const appendHours = document.querySelector(".hours");
 const appendMinutes = document.querySelector(".minutes");
 const appendSeconds = document.querySelector(".seconds");
 
 
 
+function displayCount() {
+    let hours = Math.floor(secondCount/3600);
+    let minutes = Math.floor(secondCount % 3600/60);
+    let seconds = Math.floor(secondCount % 60);
 
-function startTimer() {
-    seconds++;
-    if(seconds < 9){
-        appendSeconds.innerText = `0${seconds}`;
-    } else {
-        seconds;
-    }
+    let displayHours = `${hours < 10 ? `0${hours}` : hours}`;
+    let displayMinutes = `${minutes < 10 ? `0${minutes}` : minutes}`;
+    let displaySeconds = `${seconds < 10 ? `0${seconds}` : seconds}`;
 
-    if(seconds > 99) {
-        appendMinutes.innerText = minutes;
-    }
+    timer.textContent = `${displayHours}:${displayMinutes}:${displaySeconds}`;
 
+    secondCount++;
 }
 
-startBtn.addEventListener('click', () => {
-    interval = setInterval(startTimer);
-})
-
-
-
-
-
+stopWatch = setInterval(displayCount, 1000/60);
 
 
 function init() {
     startGame();
-    startTimer();
-    
+    displayCount();
 }
 
 init();
+
+
+
+
+
+
+
+
