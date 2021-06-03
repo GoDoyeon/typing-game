@@ -109,16 +109,18 @@ class Quize {
         this.inputBox!.addEventListener('keyup',(evt:any)=>{
             if(evt!.target.value === self.curQuiz){
                 self.isAnswer = true;
+                this.inputBox!.classList.add('sucess');
+                this.inputBox!.classList.remove('wrong');
             }else if(evt!.target.value !== self.curQuiz){
                 self.isAnswer = false;
+                this.inputBox!.classList.add('wrong');
+                this.inputBox!.classList.remove('sucess');
             }
         });
     }
     submitQuiz(){
         const self = this;
         let timer:any;
-
-        const quizBox = (document.querySelector('.input-box')as HTMLDivElement);
 
         this.inputBox!.addEventListener('keypress',(evt:any)=>{
             if (timer) {
@@ -127,19 +129,15 @@ class Quize {
             timer = setTimeout(function() {
                 if(evt.keyCode === 13){
                     if(self.isAnswer){
-                        quizBox.classList.add('sucess');
-                        quizBox.classList.remove('wrong');
                         self.randomQuize();
                         self.initInputText();
-                    }else{
-                        quizBox.classList.add('wrong');
-                        quizBox.classList.remove('sucess');
                     }
                 }
             },200);
         })
     }
     initInputText(){
+        this.inputBox!.classList.remove('sucess');
         this.inputBox!.value = "";
     }
     addZero(num:number) {
