@@ -188,3 +188,10 @@ table {
   background: transparent;
   outline-style: none;
 }
+
+.input-box.sucess{
+  border:1px solid greenyellow;
+}
+.input-box.wrong{
+  border:1px solid red;
+}

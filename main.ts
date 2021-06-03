@@ -7,7 +7,8 @@ class Quize {
     quizBox: HTMLDivElement | null;
     inputBox: HTMLInputElement | null;
     quizArray: string[];
-    curQuiz: string
+    curQuiz: string;
+    isAnswer: boolean;
 
     constructor() {
         this.watch = 0;
@@ -18,6 +19,7 @@ class Quize {
         this.inputBox = null;
         this.quizArray = ["ability", "able", "about", "above", "accept", "according", "account", "across", "act", "action", "activity", "actually", "add", "behind", "believe", "benefit", "best", "better", "between", "beyond", "card", "care", "career", "carry", "case", "catch", "cause", "cell", "center", "central", "decade", "decide", "decision", "deep", "defense", "degree", "example", "executive", "exist", "expect", "experience", "first", "fish", "five", "floor", "fly", "focus", "follow", "food"];
         this.curQuiz = '';
+        this.isAnswer = false;
         this.gameStart();
     }
 
@@ -31,7 +33,8 @@ class Quize {
             this.watchRender();
             this.randomQuize();
             this.inputFocus();
-            this.confirmQuiz();
+            this.writeQuiz();
+            this.submitQuiz();
         });
     }
     timer() {
@@ -100,10 +103,44 @@ class Quize {
         this.inputBox!.focus();
 
     }
-    confirmQuiz(){
+    writeQuiz(){
+        const self = this;
+
         this.inputBox!.addEventListener('keyup',(evt:any)=>{
-            console.log(evt!.target.value);
+            if(evt!.target.value === self.curQuiz){
+                self.isAnswer = true;
+            }else if(evt!.target.value !== self.curQuiz){
+                self.isAnswer = false;
+            }
         });
+    }
+    submitQuiz(){
+        const self = this;
+        let timer:any;
+
+        const quizBox = (document.querySelector('.input-box')as HTMLDivElement);
+
+        this.inputBox!.addEventListener('keypress',(evt:any)=>{
+            if (timer) {
+                clearTimeout(timer);
+            }
+            timer = setTimeout(function() {
+                if(evt.keyCode === 13){
+                    if(self.isAnswer){
+                        quizBox.classList.add('sucess');
+                        quizBox.classList.remove('wrong');
+                        self.randomQuize();
+                        self.initInputText();
+                    }else{
+                        quizBox.classList.add('wrong');
+                        quizBox.classList.remove('sucess');
+                    }
+                }
+            },200);
+        })
+    }
+    initInputText(){
+        this.inputBox!.value = "";
     }
     addZero(num:number) {
         return (num < 10 ? '0'+num : ''+num);
