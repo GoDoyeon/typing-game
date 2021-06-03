@@ -195,3 +195,8 @@ table {
 .input-box.wrong{
   border:1px solid red;
 }
+
+.score-box{
+  font-size: 40px;
+  color:#fff;
+}

@@ -8,7 +8,9 @@ class Quize {
     inputBox: HTMLInputElement | null;
     quizArray: string[];
     curQuiz: string;
+    quizWrongCount: number;
     isAnswer: boolean;
+    totalScore: number;
 
     constructor() {
         this.watch = 0;
@@ -19,7 +21,10 @@ class Quize {
         this.inputBox = null;
         this.quizArray = ["ability", "able", "about", "above", "accept", "according", "account", "across", "act", "action", "activity", "actually", "add", "behind", "believe", "benefit", "best", "better", "between", "beyond", "card", "care", "career", "carry", "case", "catch", "cause", "cell", "center", "central", "decade", "decide", "decision", "deep", "defense", "degree", "example", "executive", "exist", "expect", "experience", "first", "fish", "five", "floor", "fly", "focus", "follow", "food"];
         this.curQuiz = '';
+        this.quizWrongCount = 0;
         this.isAnswer = false;
+        this.totalScore = 0;
+
         this.gameStart();
     }
 
@@ -59,6 +64,7 @@ class Quize {
         this.timerRender();
         this.quizRender();
         this.inputRender();
+        this.totalScoreRender();
     }
     quizBtnRender(){
         let quizeStartBtn = document.createElement('button')as HTMLButtonElement;
@@ -131,6 +137,14 @@ class Quize {
                     if(self.isAnswer){
                         self.randomQuize();
                         self.initInputText();
+                        self.randomAddScore();
+                        if(self.totalScore >= 25){
+                            alert('통과');
+                            self.stop();
+                        }
+                    }else{
+                        self.quizWrongCount++;
+                        self.failAlert(self.quizWrongCount);
                     }
                 }
             },200);
@@ -139,6 +153,24 @@ class Quize {
     initInputText(){
         this.inputBox!.classList.remove('sucess');
         this.inputBox!.value = "";
+    }
+    randomAddScore(){
+        let score = Math.floor(Math.random() * 4) + Number(1);
+
+        this.totalScore += score;
+        (document.querySelector('.score-box')as HTMLDivElement).innerText = `현재점수:${this.totalScore}`;
+    }
+    totalScoreRender(){
+        let score = document.createElement('div')as HTMLDivElement;
+        score.classList.add('score-box')as void;
+
+        (document.getElementById('quiz-wrap')as HTMLDivElement).append(score);
+        (document.querySelector('.score-box')as HTMLDivElement).innerText = `현재점수:${this.totalScore}`;
+    }
+    failAlert(count:number){
+        if(count === 3){
+
+        }
     }
     addZero(num:number) {
         return (num < 10 ? '0'+num : ''+num);
