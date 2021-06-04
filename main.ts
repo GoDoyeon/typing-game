@@ -185,6 +185,23 @@ class Quize {
             this.failDialogRender();
         }
     }
+    resartHandle(){
+        let restartBtn = document.createElement('button')as HTMLButtonElement;
+        restartBtn.classList.add('restart-text')as void;
+        restartBtn.innerText = '재시작';
+        restartBtn.addEventListener('click',()=>{
+            this.initGame();
+            this.failEle!.remove();
+            this.startQuizeHandle();
+        });
+        this.failEle!.append(restartBtn);
+    }
+    resultScoreRender(){
+        let totalScore = document.createElement('p')as HTMLDivElement;
+        totalScore.classList.add('total-score')as void;
+        totalScore.innerHTML = `최종점수<span>${this.totalScore}</span>점`;
+        this.failEle!.append(totalScore);
+    }
     failDialogRender(){
         this.failEle = document.createElement('div')as HTMLDivElement;
         this.failEle.classList.add('fail-dialog-box')as void;
@@ -194,20 +211,8 @@ class Quize {
         popupText.innerText = 'Game Over';
         this.failEle.append(popupText);
 
-        let totalScore = document.createElement('p')as HTMLDivElement;
-        totalScore.classList.add('total-score')as void;
-        totalScore.innerHTML = `최종점수<span>${this.totalScore}</span>점`;
-        this.failEle.append(totalScore);
-
-        let restartBtn = document.createElement('button')as HTMLButtonElement;
-        restartBtn.classList.add('restart-text')as void;
-        restartBtn.innerText = '재시작';
-        restartBtn.addEventListener('click',()=>{
-            this.initGame();
-            this.failEle!.remove();
-            this.startQuizeHandle();
-        });
-        this.failEle.append(restartBtn);
+        this.resultScoreRender();
+        this.resartHandle();
 
         (document.getElementById('quiz-wrap')as HTMLDivElement).append(this.failEle);
     }
@@ -220,20 +225,8 @@ class Quize {
         popupText.innerText = '축하합니다.!!';
         this.sucessEle.append(popupText);
 
-        let totalScore = document.createElement('p')as HTMLDivElement;
-        totalScore.classList.add('total-score')as void;
-        totalScore.innerHTML = `최종점수<span>${this.totalScore}</span>점`;
-        this.sucessEle.append(totalScore);
-
-        let restartBtn = document.createElement('button')as HTMLButtonElement;
-        restartBtn.classList.add('restart-text')as void;
-        restartBtn.innerText = '재시작';
-        restartBtn.addEventListener('click',()=>{
-            this.initGame();
-            this.sucessEle!.remove();
-            this.startQuizeHandle();
-        });
-        this.sucessEle.append(restartBtn);
+        this.resultScoreRender();
+        this.resartHandle();
 
         (document.getElementById('quiz-wrap')as HTMLDivElement).append(this.sucessEle);
     }
