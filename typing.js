@@ -1,8 +1,10 @@
 'use strict'
 
-const form = document.querySelector('.form'),
-    input = form.querySelector('.input'),
-    word = document.querySelector('.word');
+
+const word = document.querySelector('.word');
+const form = document.querySelector('.form');
+let scoreSpan = document.querySelector('.score_span');
+
 
 let words = [
     'Rock',
@@ -12,34 +14,67 @@ let words = [
     'Map',
     'Constant',
     'Book',
-    'variables',
+    'variable',
     'Challenge',
-    'accomplish'
+    'accomplish',
+    'political',
+    'propose',
+    'express',
+    'inserting',
+    'disagree',
+    'against',
+    'intended',
+    'principal',
+    'delay',
+    'journalist'
 ]
 
-const randomWords = words[Math.floor(Math.random() * words.length)];
-console.log(randomWords);
 
 
-function  paintWords() {
-    word.textContent = randomWords;
+//gain random score.
+function gainScore() {
+    let score = 0;
+    let scores = [1, 2, 3, 4];
+    let randomScore = Math.floor(Math.random() * scores.length);
+    
+    scoreSpan.textContent = scores[randomScore] + score;
+    
+
     
 }
 
+
+
+
+
+//paint random Words.
+function  paintWords(words) {
+    const random = Math.floor(Math.random() * words.length);
+    word.textContent = words[random];
+}
+
+//
 function handleSubmit(event) {
     event.preventDefault();
     const currentValue = input.value;
-    if(currentValue === word.value) {
+    if(currentValue.toLowerCase() === word.textContent.toLowerCase()) {
+        paintWords(words);
+        gainScore();
+        input.value = "";
+        input.classList.remove("incorrect");
         
-    } else {
-
+    } else { 
+        input.classList.add("incorrect");
+        
     }
-    input.value = "";
+    
+    
+
 }
 
 
 function init() {
-
+    paintWords(words);
     form.addEventListener('submit', handleSubmit);
     
 }
