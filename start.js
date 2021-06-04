@@ -4,17 +4,19 @@
 //Click StartBtn to start game
 
 const startBtn = document.querySelector(".start_btn"),
-    form = document.querySelector(".timer_box"),
+    timerBox = document.querySelector(".timer_box"),
     input = document.querySelector(".input"),
-    score = document.querySelector(".score");
+    score = document.querySelector(".score"),
+    gameBox = document.querySelector('.game_box');
 
 
 function startGame() {
     startBtn.addEventListener('click', () => {
         startBtn.classList.add("hiding");
-        form.classList.add("showing");
+        timerBox.classList.add("showing");
         input.classList.add("showing");
         score.classList.add("showing");
+        gameBox.classList.add("showing");
 
     })
 }
