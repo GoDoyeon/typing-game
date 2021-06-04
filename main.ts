@@ -3,9 +3,12 @@ class Quize {
     setTime: number;
     curTime?: Date;
     times:{ min:string; sec:string; ms:string };
+    quizeStartBtn: HTMLButtonElement | null;
     timerBox: HTMLDivElement | null;
     quizBox: HTMLDivElement | null;
     inputBox: HTMLInputElement | null;
+    scoreEle: HTMLDivElement | null;
+    failEle: HTMLDivElement | null;
     quizArray: string[];
     curQuiz: string;
     quizWrongCount: number;
@@ -16,9 +19,14 @@ class Quize {
         this.watch = 0;
         this.setTime = 0;
         this.times = { min:'00', sec:'00', ms:'00' };
+
+        this.quizeStartBtn = null;
         this.timerBox = null;
         this.quizBox = null;
         this.inputBox = null;
+        this.scoreEle = null;
+        this.failEle = null;
+
         this.quizArray = ["ability", "able", "about", "above", "accept", "according", "account", "across", "act", "action", "activity", "actually", "add", "behind", "believe", "benefit", "best", "better", "between", "beyond", "card", "care", "career", "carry", "case", "catch", "cause", "cell", "center", "central", "decade", "decide", "decision", "deep", "defense", "degree", "example", "executive", "exist", "expect", "experience", "first", "fish", "five", "floor", "fly", "focus", "follow", "food"];
         this.curQuiz = '';
         this.quizWrongCount = 0;
@@ -30,17 +38,19 @@ class Quize {
 
     gameStart() {
         this.quizBtnRender();
-        let quizeStartBtn = (document.querySelector('.quiz-start-btn')as HTMLDivElement);
 
-        quizeStartBtn.addEventListener('click',()=>{
-            quizeStartBtn.remove();
-            this.start();
-            this.watchRender();
-            this.randomQuize();
-            this.inputFocus();
-            this.writeQuiz();
-            this.submitQuiz();
+        this.quizeStartBtn!.addEventListener('click',()=>{
+            this.quizeStartBtn!.remove();
+            this.startQuizeHandle();
         });
+    }
+    startQuizeHandle(){
+        this.start();
+        this.watchRender();
+        this.randomQuize();
+        this.inputFocus();
+        this.writeQuiz();
+        this.submitQuiz();
     }
     timer() {
         let { min, sec, ms} = this.times;
@@ -67,11 +77,11 @@ class Quize {
         this.totalScoreRender();
     }
     quizBtnRender(){
-        let quizeStartBtn = document.createElement('button')as HTMLButtonElement;
-        quizeStartBtn.classList.add('quiz-start-btn')as void;
-        quizeStartBtn.innerText = '시작';
+        this.quizeStartBtn = document.createElement('button')as HTMLButtonElement;
+        this.quizeStartBtn.classList.add('quiz-start-btn')as void;
+        this.quizeStartBtn.innerText = '시작';
 
-        (document.getElementById('quiz-wrap')as HTMLDivElement).append(quizeStartBtn);
+        (document.getElementById('quiz-wrap')as HTMLDivElement).append(this.quizeStartBtn);
     }
     timerRender(){
         this.timerBox =  document.createElement('div')as HTMLDivElement;
@@ -143,6 +153,7 @@ class Quize {
                             self.stop();
                         }
                     }else{
+
                         self.quizWrongCount++;
                         self.failAlert(self.quizWrongCount);
                     }
@@ -161,16 +172,52 @@ class Quize {
         (document.querySelector('.score-box')as HTMLDivElement).innerText = `현재점수:${this.totalScore}`;
     }
     totalScoreRender(){
-        let score = document.createElement('div')as HTMLDivElement;
-        score.classList.add('score-box')as void;
+        this.scoreEle = document.createElement('div')as HTMLDivElement;
+        this.scoreEle.classList.add('score-box')as void;
 
-        (document.getElementById('quiz-wrap')as HTMLDivElement).append(score);
+        (document.getElementById('quiz-wrap')as HTMLDivElement).append(this.scoreEle);
         (document.querySelector('.score-box')as HTMLDivElement).innerText = `현재점수:${this.totalScore}`;
     }
     failAlert(count:number){
         if(count === 3){
-
+            this.stop();
+            this.failDialogRender();
         }
+    }
+    failDialogRender(){
+        this.failEle = document.createElement('div')as HTMLDivElement;
+        this.failEle.classList.add('fail-dialog-box')as void;
+
+        let popupText = document.createElement('p')as HTMLDivElement;
+        popupText.classList.add('fail-text')as void;
+        popupText.innerText = 'Game Over';
+        this.failEle.append(popupText);
+
+        let totalScore = document.createElement('p')as HTMLDivElement;
+        totalScore.classList.add('total-score')as void;
+        totalScore.innerHTML = `최종점수<span>${this.totalScore}</span>점`;
+        this.failEle.append(totalScore);
+
+        let restartBtn = document.createElement('button')as HTMLButtonElement;
+        restartBtn.classList.add('restart-text')as void;
+        restartBtn.innerText = '재시작';
+        restartBtn.addEventListener('click',()=>{
+            this.initGame();
+            this.failEle!.remove();
+            this.startQuizeHandle();
+        });
+        this.failEle.append(restartBtn);
+
+        (document.getElementById('quiz-wrap')as HTMLDivElement).append(this.failEle);
+    }
+    initGame(){
+        const self = this;
+        [self.quizeStartBtn, self.timerBox, self.quizBox, self.inputBox, self.scoreEle].map((item)=>{
+            item!.remove();
+        });
+
+        self.totalScore = 0;
+        self.quizWrongCount = 0;
     }
     addZero(num:number) {
         return (num < 10 ? '0'+num : ''+num);
