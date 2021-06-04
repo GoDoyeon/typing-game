@@ -6,21 +6,33 @@
 body {
   display: flex;
   justify-content: center;
+  background-color: rgb(255, 251, 245);
 }
 
 .game_box {
   border: 30px solid rgb(255, 158, 158);
+  background-color: white;
 }
 
 .input,
 .timer_box,
-.score {
+.score,
+.game_box {
   display: none;
   margin: 2rem;
   text-align: center;
 }
 
+.start_btn {
+  position: relative;
+  top: 100px;
+}
+
 .input {
+  text-align: center;
+}
+
+.word {
   text-align: center;
 }
 
@@ -43,4 +55,8 @@ p {
 
 .hiding {
   display: none;
+}
+
+.incorrect {
+  outline-color: rgb(255, 52, 52);
 }
