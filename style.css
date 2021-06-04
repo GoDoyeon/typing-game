@@ -201,7 +201,7 @@ table {
     color: #fff;
 }
 
-.fail-dialog-box {
+.fail-dialog-box, .sucess-dialog-box {
     position: fixed;
     display: flex;
     justify-content: center;
@@ -225,7 +225,7 @@ table {
     font-size: 50px;
 }
 
-.fail-text {
+.fail-text, .sucess-text {
     color: #63f0cd;
     font-size: 60px;
     font-weight: bold;

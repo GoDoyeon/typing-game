@@ -9,6 +9,7 @@ class Quize {
     inputBox: HTMLInputElement | null;
     scoreEle: HTMLDivElement | null;
     failEle: HTMLDivElement | null;
+    sucessEle: HTMLDivElement | null;
     quizArray: string[];
     curQuiz: string;
     quizWrongCount: number;
@@ -26,6 +27,7 @@ class Quize {
         this.inputBox = null;
         this.scoreEle = null;
         this.failEle = null;
+        this.sucessEle = null;
 
         this.quizArray = ["ability", "able", "about", "above", "accept", "according", "account", "across", "act", "action", "activity", "actually", "add", "behind", "believe", "benefit", "best", "better", "between", "beyond", "card", "care", "career", "carry", "case", "catch", "cause", "cell", "center", "central", "decade", "decide", "decision", "deep", "defense", "degree", "example", "executive", "exist", "expect", "experience", "first", "fish", "five", "floor", "fly", "focus", "follow", "food"];
         this.curQuiz = '';
@@ -149,11 +151,10 @@ class Quize {
                         self.initInputText();
                         self.randomAddScore();
                         if(self.totalScore >= 25){
-                            alert('통과');
                             self.stop();
+                            self.sucessDialogRender()
                         }
                     }else{
-
                         self.quizWrongCount++;
                         self.failAlert(self.quizWrongCount);
                     }
@@ -209,6 +210,32 @@ class Quize {
         this.failEle.append(restartBtn);
 
         (document.getElementById('quiz-wrap')as HTMLDivElement).append(this.failEle);
+    }
+    sucessDialogRender(){
+        this.sucessEle = document.createElement('div')as HTMLDivElement;
+        this.sucessEle.classList.add('sucess-dialog-box')as void;
+
+        let popupText = document.createElement('p')as HTMLDivElement;
+        popupText.classList.add('sucess-text')as void;
+        popupText.innerText = '축하합니다.!!';
+        this.sucessEle.append(popupText);
+
+        let totalScore = document.createElement('p')as HTMLDivElement;
+        totalScore.classList.add('total-score')as void;
+        totalScore.innerHTML = `최종점수<span>${this.totalScore}</span>점`;
+        this.sucessEle.append(totalScore);
+
+        let restartBtn = document.createElement('button')as HTMLButtonElement;
+        restartBtn.classList.add('restart-text')as void;
+        restartBtn.innerText = '재시작';
+        restartBtn.addEventListener('click',()=>{
+            this.initGame();
+            this.sucessEle!.remove();
+            this.startQuizeHandle();
+        });
+        this.sucessEle.append(restartBtn);
+
+        (document.getElementById('quiz-wrap')as HTMLDivElement).append(this.sucessEle);
     }
     initGame(){
         const self = this;
