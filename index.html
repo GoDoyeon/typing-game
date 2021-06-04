@@ -4,32 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Typing Game </title>
+    <title>Typing Game</title>
     <link rel="stylesheet" href="css/index.css">
 </head>
+<script>
+    
+
+    </script>
 <body>
-    <div class="header">타이핑 마스터</div>
+    <div class="header">Typing Game</div>
     
-    <!-- 사용자 남은 시간-->
-    <div class="game-time">
-        YOUR TIME <span class="time">0</span> 
-    </div>
-    
-    <!-- 단어 -->
-    <div class="word-display">
-        Hello
+    <!-- 게임 시작 버튼 -->
+    <div id="game-start-btn">
+        <button class="game-start-btn">START</button>
     </div>
 
-    <!-- 단어 입력 창 -->
-    <div class="word-input-box">
-        <input type="text" class="word-input">
-    </div>
-
-    <!-- 사용자 게임 점수-->
-    <div class="game-score">
-        YOUR SCORE <span class="score">0</span> SCORE
-    </div>
-
-    
+    <div id="game-start">
+        <!-- 사용자 남은 시간 -->
+        <div class="game-time">
+            YOUR TIME <span class="time">00:00:00</span> 
+            <!-- <input type="button" value="시작" class="start-btn" /> -->
+        </div>
+        <!-- 단어 -->
+        <div class="word-display">
+            Hello
+        </div>
+        <!-- 단어 입력 창 -->
+        <div class="word-input-box">
+            <input type="text" onkeyup="enterkey()" class="word-input">
+        </div>
+        <!-- 사용자 게임 점수-->
+        <div class="game-score">
+            YOUR SCORE <span class="score">0</span> SCORE
+        </div>
+    </div>     
+    <script src="js/main.js"></script>     
 </body>
 </html>
