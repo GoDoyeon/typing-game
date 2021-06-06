@@ -37,9 +37,8 @@ function gainScore() {
     let scores = [1, 2, 3, 4];
     let randomScore = Math.floor(Math.random() * scores.length);
     
-    scoreSpan.textContent = scores[randomScore] + score;
-    
-
+    score = randomScore;
+    scoreSpan.innerHTML = parseInt(scoreSpan.innerHTML) + score;
     
 }
 
