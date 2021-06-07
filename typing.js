@@ -31,16 +31,16 @@ const wordArray = [
 ];
 
 
-
+let count = 0;
 
 //랜덤 단어
 function randomWord() {
     
     let newWordArray = [];
     
-    let randomArr = wordArray.splice(Math.floor(Math.random() * wordArray.length), 1)[0];
+    let randomArr = wordArray.splice(Math.floor(Math.random() * wordArray.length), 1);
     newWordArray.push(randomArr);
-    let randomWord = newWordArray[0];
+    let randomWord = newWordArray;
     word.innerText = randomWord;
 
 }
@@ -55,6 +55,7 @@ function validation(e) {
     if (currentValue != innerTextWord) {
         inputText.classList.add('outLine');
        //여기서 3번 돌아가면 alert창 뜨고 종료
+        inputForm.addEventListener("submit", falseSubmit);
     }
     
     if (currentValue === '' || currentValue === innerTextWord) {
@@ -73,6 +74,11 @@ function addScore() {
 
     score = randomScore[Math.floor(Math.random() * randomScore.length)];
     scoreText.innerText = parseInt(scoreText.innerText) + score;
+    
+    if (scoreText.innerText >= 25) {
+        alert('게임 통과');
+        location.reload();
+    }
 }
 
 
@@ -84,6 +90,22 @@ function answerSubmit(e) {
     inputText.value = "";
     addScore();
 }
+
+
+
+//실패일떄
+function falseSubmit(e) {
+    e.preventDefault();
+    randomWord();
+    inputText.value = "";
+    count++;
+    if (count === 3) {
+        alert("Game Over");
+        location.reload();
+    }
+   
+}
+
 
 
 function init() {
