@@ -5,6 +5,7 @@ const word = document.querySelector('.word');
 const form = document.querySelector('.form');
 let scoreSpan = document.querySelector('.score_span');
 let playing;
+let count = 0;
 
 
 let words = [
@@ -65,7 +66,11 @@ function handleSubmit(event) {
         
     } else { 
         input.classList.add("incorrect");
-        
+        count++;
+        if (count === 3) {
+            alert('Game Over!');
+            location.reload();
+        }
     }
     
     
