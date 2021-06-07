@@ -52,7 +52,7 @@ stopWatch = setInterval(displayCount, 1000);
 
 
 function init() {
-    startGame();
+    startBtn.addEventListener('click', startGame);
     displayCount();
 }
 
