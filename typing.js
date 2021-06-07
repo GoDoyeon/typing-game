@@ -4,6 +4,7 @@
 const word = document.querySelector('.word');
 const form = document.querySelector('.form');
 let scoreSpan = document.querySelector('.score_span');
+let playing;
 
 
 let words = [
