@@ -27,11 +27,29 @@ const wordArray = [
     'window',
     'star',
     'mask',
+    'cow',
+    'usually',
+    'read',
+    'tree',
+    'dance',
+    'camera',
+    'rice',
+    'kimchi',
+    'ramen',
+    'car',
+    'best',
+    'flash',
+    'clear',
+    'click',
+    'coin',
+    'desk',
 
 ];
 
 
-let count = 0;
+let count = 0; // 틀린 횟수 확인용 변수
+let currentValue = ''; //현재 input value값 대입
+let innerTextWord = ''; // 현재 innerText 값 대입
 
 //랜덤 단어
 function randomWord() {
@@ -45,23 +63,21 @@ function randomWord() {
 
 }
 
- 
 // 틀린단어
-function validation(e) {
-    e = inputText.value;
-    let currentValue = e;
-    let innerTextWord = word.innerText;
+function validation() {
+
+    currentValue = inputText.value;;
+    innerTextWord = word.innerText;
 
     if (currentValue != innerTextWord) {
+        
         inputText.classList.add('outLine');
-       //여기서 3번 돌아가면 alert창 뜨고 종료
-        inputForm.addEventListener("submit", falseSubmit);
-    }
-    
-    if (currentValue === '' || currentValue === innerTextWord) {
+      
+    }else if (currentValue === '' || currentValue === innerTextWord) {
+        
         inputText.classList.remove('outLine');
-        inputForm.addEventListener("submit", answerSubmit);
     }
+    inputForm.addEventListener("submit", answerSubmit);
 
 }
 
@@ -83,29 +99,25 @@ function addScore() {
 
 
 
-//정답일때
+//정답확인
 function answerSubmit(e) {
     e.preventDefault();
     randomWord();
-    inputText.value = "";
-    addScore();
-}
+    inputText.value = "";   
+    if (currentValue === innerTextWord) {
+        
+        addScore();
 
+    } else {
 
+        count++;
+        if (count === 3) {
 
-//실패일떄
-function falseSubmit(e) {
-    e.preventDefault();
-    randomWord();
-    inputText.value = "";
-    count++;
-    if (count === 3) {
-        alert("Game Over");
-        location.reload();
+            alert("Game Over");
+            location.reload();
+        }
     }
-   
 }
-
 
 
 function init() {
