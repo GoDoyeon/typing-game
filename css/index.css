@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
 body {
@@ -15,7 +16,6 @@ body {
   width: 100%;
   background-color: #94b9f3;
   color: #fff9ec;
-  text-align: center;
   padding: 1rem;
   font-size: 1.7rem;
   font-weight: bold;
@@ -43,9 +43,11 @@ body {
 }
 
 .word-input {
+  text-align: center;
   padding: 0.5rem;
   width: 300px;
   height: 40px;
+  font-size: 1.3rem;
 }
 
 .game-time {
@@ -67,4 +69,7 @@ body {
   font-size: 2rem;
   color: #dddea5;
   font-weight: bold;
+}
+.Incorrect {
+  outline-color: rgb(255, 52, 52);
 }
