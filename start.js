@@ -6,4 +6,8 @@ function startGame() {
     game.classList.remove('hiding');
 }
 
-startBtn.addEventListener('click', startGame);
+function init() {
+    startBtn.addEventListener('click', startGame);
+}
+
+init();
