@@ -29,7 +29,6 @@ window.onload = function() {
     buttonEvt();
     var startBtn = document.getElementById('startbtn');
     var gameStart = document.getElementById('gamestart');
-    gameStart.style.display="none";             // 처음엔 게임 화면을 숨기고
     startBtn.onclick = function() {         // start 버튼을 클릭하면
         gameStart.style.display = 'block';      // 게임 화면을 보여주고
         startBtn.style.display = 'none';    // start버튼을 숨긴다.
@@ -110,6 +109,8 @@ function init() {
     // form을 submit할 때마다 checkMatch 메소드가 실행된다.
     wordInputForm.addEventListener('submit', checkMatch);
     document.getElementById("time").innerHTML = "00:00:00";
+    gamestart.style.display="none";             // 처음엔 게임 화면을 숨기고
+
 }
 
 // 처음에 클릭이벤트를 실행하기 위해서 만들어둔 함수
